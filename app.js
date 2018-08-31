@@ -5,35 +5,22 @@ const readReadme = (callBack) => {
         if (err){
         console.log('Tienes un error');
     } else {
-        callBack(data);
-        
+       link(data);
     }
+
     });
-};
+    };  
+    readReadme();
 
-readReadme(callBack = data => console.log(data));
-    
- const data = fs.readFileSync('./README.md', 'utf8');
+    const link = (data) => {
+        console.log(data)
+        let regularExp = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))/g;
+        let links = data.match(regularExp);
+        if (links) {
+            console.log(links)
+        } else {
+            console.log(error)
+        }
 
-fs.watch('./', (eventType, fileName) =>{
-    console.log('tipo de evento' + eventType);
-    if(fileName){
-        console.log('En el archivo:' + fileName);
-    } else {
-        console.log('no tienes cambios en archivos');
-        
-    }
-    
-});
+    };
 
-// const countLine = (err, data) => {
-//     if (err) {
-//         console.log('No tienes README.md');
-//     } else {
-//         let lines = data.split('/n').length;
-//         console.log('El archivo tiene:' + lines + 'lineas');
-//     }
-// };
-
-// fs.readFile('./README.md', 'utf8', countLine);
-// exports.countLine = countLine;
